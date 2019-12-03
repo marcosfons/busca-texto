@@ -10,6 +10,7 @@ typedef struct ItemValue {
 // And store a nextItem, in case of repeated words added
 typedef struct HashItem {
 	int key;
+	char *word;
 	int row;
 	int col;
 	struct HashItem *nextItem;
@@ -18,7 +19,7 @@ typedef struct HashItem {
 // Structure to store the all hashTable
 typedef struct HashTable {
 	int size;
-	HashItem *items;
+	HashItem **items;
 } HashTable;
 
 
@@ -27,6 +28,11 @@ void createHashTable(HashTable *table);
 
 // Create a hashTable with the given text
 void createHashTableWithText(HashTable *table, char **text);
+
+HashItem *addHashItem(int key, char *word, int row, int col, HashItem *next);
+
+// Set a hashItem to the given pointer
+void setHashItem(HashItem *pointer, int key, char *word, int row, int col);
 
 // Add a item with the given word
 void addItem(HashTable *table, char *word, int row, int col);

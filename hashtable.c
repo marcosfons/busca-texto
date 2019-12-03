@@ -1,15 +1,12 @@
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include "hashtable.h"
 
 void createHashTable(HashTable *table) {
 	table->size = 157;
-	table->items = malloc(157 * sizeof(HashItem));
-	HashItem item = {-1, -1, -1, NULL};
-	for(int i = 0; i < table->size; i++) {
-		table->items[i] = item;
-	}
+	table->items = (HashItem**)  malloc(table->size * sizeof(HashItem*));
 }
 
 void createHashTableWithText(HashTable *table, char **text) {
@@ -24,28 +21,51 @@ void createHashTableWithText(HashTable *table, char **text) {
 	do {
 		nextWord = findNextWord(text, &currPosition, &row, &col);
 	} while (nextWord != NULL); {
-		addItem(table, nextWord, row, col);		
+		addItem(table, nextWord, row, col);
 	}
 }
 
 char *findNextWord(char **text, int *currPosition, int *row, int *col) {
 }
 
+HashItem *addHashItem(int key, char *word, int row, int col, HashItem *next) {
+	HashItem *pointer = malloc(sizeof(HashItem));
+	pointer->word = malloc(sizeof(char) * strlen(word));
+	strcpy(pointer->word, word);
+	pointer->key = key;
+	pointer->row = row;
+	pointer->col = col;
+	pointer->nextItem = next;
+	return pointer;
+}
+
+void setHashItem(HashItem *pointer, int key, char *word, int row, int col) {
+	pointer->word = malloc(sizeof(char) * strlen(word));
+	strcpy(pointer->word, word);
+	pointer->key = key;
+	pointer->row = row;
+	pointer->col = col;
+	pointer->nextItem = NULL;
+}
+
 void addItem(HashTable *table, char *word, int row, int col) {
 	int key = hashCode(table, word);
 
-	HashItem item = {key, row, col, NULL};
-
 	printf("Ainda ta certo\n");
-	HashItem *lastPointer = table->items[key].nextItem;
-
+	HashItem *lastPointer = table->items[key];
+		
 	printf("Chegou aqui?\n");
 	while (lastPointer != NULL) {
 		printf("Entrou aqui\n");
 		lastPointer = lastPointer->nextItem;
 	}
+	
+	if(lastPointer == NULL) printf("E null\n");
+	lastPointer = (HashItem*)  malloc(sizeof(HashItem));
+	
+	setHashItem(lastPointer, key, word, row, col);
 
-	*(lastPointer) = item;
+	if(table->items[key] == NULL) table->items[key] = lastPointer;
 }
 
 int hashCode(HashTable *table, char *word) {
@@ -64,7 +84,7 @@ int hashCode(HashTable *table, char *word) {
 void findValue(HashTable *table, char *word, HashItem **item) {
 	int key = hashCode(table, word);
 	
-	*item = &(table->items[key]);
+	*item = table->items[key];
 }
 
 

@@ -25,11 +25,10 @@ void main() {
 	
 	
 	addItem(&table, testeString, 0, 0);
-	/*	
+		
 	findValue(&table, "teste", &value);
 	printf("Existe na tabela: %d\n", value != NULL);
 
-	*/
 	printf("\n");
 	
 }

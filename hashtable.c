@@ -58,6 +58,7 @@ void addItem(HashTable *table, char *word, int row, int col) {
 	if(lastPointer == NULL) {
 		lastPointer = (HashItem*)  malloc(sizeof(HashItem));
 		setHashItem(lastPointer, key, word, row, col);
+		table->items[key] = lastPointer;
 		return;
 	}
 	
@@ -69,7 +70,6 @@ void addItem(HashTable *table, char *word, int row, int col) {
 	
 	lastPointer->nextItem = (HashItem*)  malloc(sizeof(HashItem));
 	setHashItem(lastPointer->nextItem, key, word, row, col);
-
 }
 
 int hashCode(HashTable *table, char *word) {

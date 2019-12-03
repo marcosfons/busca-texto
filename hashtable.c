@@ -53,19 +53,23 @@ void addItem(HashTable *table, char *word, int row, int col) {
 
 	printf("Ainda ta certo\n");
 	HashItem *lastPointer = table->items[key];
-		
-	printf("Chegou aqui?\n");
-	while (lastPointer != NULL) {
+	
+	// Add in the table
+	if(lastPointer == NULL) {
+		lastPointer = (HashItem*)  malloc(sizeof(HashItem));
+		setHashItem(lastPointer, key, word, row, col);
+		return;
+	}
+	
+	// Inhere add in the linked list
+	while (lastPointer->nextItem != NULL) {
 		printf("Entrou aqui\n");
 		lastPointer = lastPointer->nextItem;
 	}
 	
-	if(lastPointer == NULL) printf("E null\n");
-	lastPointer = (HashItem*)  malloc(sizeof(HashItem));
-	
-	setHashItem(lastPointer, key, word, row, col);
+	lastPointer->nextItem = (HashItem*)  malloc(sizeof(HashItem));
+	setHashItem(lastPointer->nextItem, key, word, row, col);
 
-	if(table->items[key] == NULL) table->items[key] = lastPointer;
 }
 
 int hashCode(HashTable *table, char *word) {

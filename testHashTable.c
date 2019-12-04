@@ -11,23 +11,33 @@ void main() {
 	HashTable table;		
 	createHashTable(&table);
 	
-	hashCode(&table, "teste");
-	printf("First ValueHash: %d", hashCode(&table, "teste"));
+	char *test = "teste";
 	
-	char *testeString = "teste";
+	printf("%s ValueHash: %d\n", test, hashCode(&table, test));
 	
 	HashItem *value = NULL;
 	
-	findValue(&table, "teste", &value);
+	findValue(&table, test, &value);
 	
-	printf("af");
 	printf("Existe na tabela: %d\n", value !=  NULL);
 	
 	
-	addItem(&table, testeString, 0, 0);
-		
-	findValue(&table, "teste", &value);
-	printf("Existe na tabela: %d\n", value != NULL);
+	addItem(&table, test, 0, 0);
+
+	findValue(&table, test, &value);
+	printf("Existe na tabela: %d Proximo: %d\n", value != NULL, value->nextItem != NULL);
+
+	addItem(&table, test, 1, 1);
+	findValue(&table, test, &value);
+	printf("Existe na tabela: %d Proximo: %d\n", value != NULL, value->nextItem != NULL);
+
+	addItem(&table, "Abacate", 5, 5);
+	addItem(&table, "Aleatório", 8, 8);
+	addItem(&table, "Aleatório", 12, 12);
+	addItem(&table, "Aleatório", 20, 25);
+
+
+	printHash(&table);
 
 	printf("\n");
 	

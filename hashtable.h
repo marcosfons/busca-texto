@@ -29,10 +29,8 @@ void createHashTable(HashTable *table);
 // Create a hashTable with the given text
 void createHashTableWithText(HashTable *table, char **text);
 
-HashItem *addHashItem(int key, char *word, int row, int col, HashItem *next);
-
-// Set a hashItem to the given pointer
-void setHashItem(HashItem *pointer, int key, char *word, int row, int col);
+// Create a single HashItem and return its pointer
+HashItem *createHashItem(int key, char *word, int row, int col);
 
 // Add a item with the given word
 void addItem(HashTable *table, char *word, int row, int col);
@@ -49,22 +47,10 @@ char *findNextWord(char **text, int *currPosition, int *row, int *col);
 // Return NULL if not find
 void findValue(HashTable *table, char *word, HashItem **item);
 
+// Print the hash
+void printHash(HashTable *table);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// Print the item and the next ones
+void printList(HashItem *item);
 
 

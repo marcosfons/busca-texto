@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 
-#include "hashtable.h"
+#include "../hashtable/hashtable.h"
 
 void main() {
 	// Simple program to test functions of the HashTable module

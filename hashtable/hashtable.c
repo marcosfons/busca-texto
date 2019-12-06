@@ -5,7 +5,7 @@
 #include "hashtable.h"
 
 void createHashTable(HashTable *table) {
-	table->size = 157;
+	table->size = 12347;
 	table->items = (HashItem**)  malloc(table->size * sizeof(HashItem*));
 	
 	// Solve windows problems, each pointer is NULL in the beginning
@@ -23,14 +23,12 @@ void createHashTableWithText(HashTable *table, char **text) {
 
 	char *nextWord;
 	do {
-		nextWord = findNextWord(text, &currPosition, &row, &col);
+		//nextWord = findNextWord(text, &currPosition, &row, &col);
 	} while (nextWord != NULL); {
 		addItem(table, nextWord, row, col);
 	}
 }
 
-char *findNextWord(char **text, int *currPosition, int *row, int *col) {
-}
 
 HashItem *createHashItem(int key, char *word, int row, int col) {
 	HashItem *pointer = malloc(sizeof(HashItem));
@@ -85,7 +83,7 @@ void printHash(HashTable *table) {
 	printf("Formato: (palavra, linha, coluna)\n");
 	for(int i = 0; i < table->size; i++) {
 		if(table->items[i] != NULL) {
-			printf("Key: %d\n\t", i);
+			printf("Key: %d  ", i);
 			printList(table->items[i]);
 			printf("\n");
 		}

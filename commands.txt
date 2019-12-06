@@ -1,4 +1,0 @@
-
-
-gcc hashtable.c testHashTable.c -o testHashTable.o
-

@@ -39,10 +39,6 @@ void addItem(HashTable *table, char *word, int row, int col);
 // Table parameter because the code hash of the given word depends on the table
 int hashCode(HashTable *table, char *word);
 
-// Find the next word in the text
-// Return NULL if not find
-char *findNextWord(char **text, int *currPosition, int *row, int *col);
-
 // Try to find the given word in the table
 // Return NULL if not find
 void findValue(HashTable *table, char *word, HashItem **item);

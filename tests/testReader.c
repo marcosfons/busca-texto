@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "reader.h"
+#include "../reader/reader.h"
 
 void main() {
 	openFile("texto.txt");	

@@ -2,10 +2,16 @@
 
 
 // Responsible to openFile and control the pointers, and the data of file
-void openFile(char *pathFile);
+void openFile(char *pathFile, char ***rows);
 
 // Responsible to closeFile and free memory
-void closeFile();
+void closeFile(char ***rows, int lines);
 
 // Responsible to find the next word in file and returns it
-char *findNextWord(int *row, int *col, int *sizeWord);
+char *findNextWord(int *row, int *col, int *sizeWord, char ***rows);
+
+// "Create" the lines
+// void createLines(char ***rows);
+
+// Add new line
+void addNewLine(int *row, int *col, char ***rows);

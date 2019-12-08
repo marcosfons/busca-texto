@@ -26,9 +26,6 @@ typedef struct HashTable {
 // Just create a hashTable
 void createHashTable(HashTable *table);
 
-// Create a hashTable with the given text
-void createHashTableWithText(HashTable *table, char **text);
-
 // Create a single HashItem and return its pointer
 HashItem *createHashItem(int key, char *word, int row, int col);
 
@@ -49,4 +46,8 @@ void printHash(HashTable *table);
 // Print the item and the next ones
 void printList(HashItem *item);
 
+// Free memory of the table
+void freeTable(HashTable *table);
 
+// Free memory of the item
+void freeList(HashItem *item);

@@ -5,28 +5,12 @@
 #include "hashtable.h"
 
 void createHashTable(HashTable *table) {
-	table->size = 12347;
-	table->items = (HashItem**)  malloc(table->size * sizeof(HashItem*));
+	table->size = 557;
+	table->items = (HashItem**) malloc(table->size * sizeof(HashItem*));
 	
 	// Solve windows problems, each pointer is NULL in the beginning
 	for(int i = 0; i < table->size; i++)
 		table->items[i] = NULL;
-}
-
-void createHashTableWithText(HashTable *table, char **text) {
-	createHashTable(table);
-	
-	// Store the currentPosition of the cursor
-	int currPosition = 0;
-	int row = 0;
-	int col = 0;
-
-	char *nextWord;
-	do {
-		//nextWord = findNextWord(text, &currPosition, &row, &col);
-	} while (nextWord != NULL); {
-		addItem(table, nextWord, row, col);
-	}
 }
 
 
@@ -63,19 +47,30 @@ void addItem(HashTable *table, char *word, int row, int col) {
 int hashCode(HashTable *table, char *word) {
 	int count = 0;
 	int curr = 0;
-	
+	int pot = 1;
+
 	// Assumes it's just a word
-	while(word[curr] != '\0') {
+	while(word[ curr++ ] != '\0') {
 		count += (int) word[curr];
-		curr += 1;
 	}	
 	return count % table->size;
 }
 
 void findValue(HashTable *table, char *word, HashItem **item) {
-	int key = hashCode(table, word);
-	
-	*item = table->items[key];
+	if(*item == NULL) {
+		int key = hashCode(table, word);
+		*item = table->items[key];
+	} else {
+		if((*item)->nextItem != NULL) {
+			if(strcmp(word, (*item)->word) == 0) {
+				*item = (*item)->nextItem;
+			} else {
+				findValue(table, word, &((*item)->nextItem) );
+			}
+		} else {
+			*item = NULL;
+		}
+	}
 }
 
 void printHash(HashTable *table) {
@@ -96,6 +91,22 @@ void printList(HashItem *item) {
 		printf(" -> ");
 		printList(item->nextItem);
 	}
+}
+
+void freeTable(HashTable *table) {
+	for(int i = 0; i < table->size; i++) {
+		if(table->items[i] != NULL) {
+			freeList(table->items[i]);
+		}
+	}
+	free(table->items);
+}
+
+void freeList(HashItem *item) {
+	if(item->nextItem != NULL) {
+		freeList(item->nextItem);
+	}
+	free(item);
 }
 
 

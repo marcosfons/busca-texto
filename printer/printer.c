@@ -25,9 +25,7 @@ void printLine(char *line, int nRow) {
 }
 
 void printSubstring(char *string, int start, int end) {
-	// fwrite(string + start, 1, end, stdout);
 	printf("%.*s", end - start +1, (string + start)); 
-
 }
 
 int printMatchedWord(char *word) {

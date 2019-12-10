@@ -44,6 +44,9 @@ char *findNextWord(int *row, int *col, int *sizeWord, char ***rows, int *colBefo
 	char *word = (char*) malloc(100 * sizeof(char));
 	*sizeWord = -1;
 	char currChar;
+
+	// This is to maintain the col even after newLine
+	// Stores the col number of the word before the newLine
 	*colBeforeNewLine = 0;
 
 	while((currChar = fgetc(file)) != EOF) {
@@ -60,9 +63,12 @@ char *findNextWord(int *row, int *col, int *sizeWord, char ***rows, int *colBefo
 		} else {
 			// Count new line
 			if(currChar == '\n') {
-				addNewLine(row, col, rows, colBeforeNewLine);
+				if(*sizeWord >= 0) {
+					addNewLine(row, col, rows, colBeforeNewLine);
+				} else {
+					addNewLine(row, col, rows, NULL);
+				}
 			}
-
 
 			if(*sizeWord > -1) { // End of the word	
 				break;
@@ -82,7 +88,9 @@ char *findNextWord(int *row, int *col, int *sizeWord, char ***rows, int *colBefo
 
 
 void addNewLine(int *row, int *col, char ***rows, int *colBeforeNewLine) {
-	*colBeforeNewLine = *col;
+	if(colBeforeNewLine != NULL) {
+		*colBeforeNewLine = *col;
+	}
 
 	(*rows)[*row][*col] = '\0';
 	(*rows)[*row] = (char*) realloc((*rows)[*row], (*col) * sizeof(char));

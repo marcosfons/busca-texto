@@ -10,6 +10,8 @@ static FILE *file = NULL;
 // Control the allocation of the line
 static int sizeRow = 0;
 
+static int nRow = 0;
+
 void openFile(char *pathFile, char ***rows) {
 	if(file == NULL) {
 		file = fopen(pathFile, "r");
@@ -38,10 +40,11 @@ void closeFile(char ***rows, int lines) {
 	}
 }
 
-char *findNextWord(int *row, int *col, int *sizeWord, char ***rows) {
+char *findNextWord(int *row, int *col, int *sizeWord, char ***rows, int *colBeforeNewLine) {
 	char *word = (char*) malloc(100 * sizeof(char));
 	*sizeWord = -1;
 	char currChar;
+	*colBeforeNewLine = 0;
 
 	while((currChar = fgetc(file)) != EOF) {
 		
@@ -57,7 +60,7 @@ char *findNextWord(int *row, int *col, int *sizeWord, char ***rows) {
 		} else {
 			// Count new line
 			if(currChar == '\n') {
-				addNewLine(row, col, rows);
+				addNewLine(row, col, rows, colBeforeNewLine);
 			}
 
 
@@ -78,7 +81,9 @@ char *findNextWord(int *row, int *col, int *sizeWord, char ***rows) {
 }
 
 
-void addNewLine(int *row, int *col, char ***rows) {
+void addNewLine(int *row, int *col, char ***rows, int *colBeforeNewLine) {
+	*colBeforeNewLine = *col;
+
 	(*rows)[*row][*col] = '\0';
 	(*rows)[*row] = (char*) realloc((*rows)[*row], (*col) * sizeof(char));
 

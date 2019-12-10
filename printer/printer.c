@@ -16,13 +16,29 @@
 #define YELLOW(string) "\033[33;4m" string "\033[0m"
 #define NUMBER_MATCHED_ROW(string) "\x1b[31m" string "\x1b[0m"
 
+void printMatchedLine(int nRow) {
+	printf(NUMBER_MATCHED_ROW("%2d  "), nRow);
+}
+
 void printLine(char *line, int nRow) {
 	printf("%2d  %s", nRow, line);
+}
+
+void printSubstring(char *string, int start, int end) {
+	// fwrite(string + start, 1, end, stdout);
+	printf("%.*s", end - start +1, (string + start)); 
+
+}
+
+int printMatchedWord(char *word) {
+	printf(YELLOW("%s"), word);
+	return strlen(word);
 }
 
 void printLineWithMarkedWord(char *line, char *word, int posWord, int nRow) {
 	int finalPosWord = posWord + strlen(word);
 	// printf("\033[31;1;4mHello\033[0m");
+	printf("    %s    ", word);
 	printf(NUMBER_MATCHED_ROW("%2d  "), nRow);
 	fwrite(line, 1, posWord, stdout);
 	printf(YELLOW("%s"), word);

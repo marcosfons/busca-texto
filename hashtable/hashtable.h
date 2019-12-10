@@ -38,7 +38,7 @@ int hashCode(HashTable *table, char *word);
 
 // Try to find the given word in the table
 // Return NULL if not find
-void findValue(HashTable *table, char *word, HashItem **item);
+HashItem *findValue(HashTable *table, char *word, HashItem *item);
 
 // Print the hash
 void printHash(HashTable *table);

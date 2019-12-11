@@ -17,17 +17,10 @@ Gere os executáveis, e execute:
 	make
 	./main.o
 	```
-
-2. Teste do módulo da **Tabela Hash**
+2. **Passando arquivo por parâmetro**
+	É possível passar um arquivo de texto por parâmetro, para isso execute:
 	```
-	make testhashtable
-	tests/testHashTable.o
-	```
-
-3. Teste do módulo do **Reader**
-	```
-	make testreader
-	tests/testReader.o
+	./main.o nome_arquivo_texto.txt
 	```
 
 ## Limpar os executáveis gerados

@@ -1,10 +1,3 @@
-/*
-// Structure to store the row and the col of the word
-typedef struct ItemValue {
-	int row;
-	int col;
-} ItemValue;
-*/
 
 // Structure to store the key and the related value
 // And store a nextItem, in case of repeated words added

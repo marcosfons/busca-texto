@@ -5,7 +5,7 @@
 #include "hashtable.h"
 
 void createHashTable(HashTable *table) {
-	table->size = 323;
+	table->size = 233;
 	table->items = (HashItem**) malloc(table->size * sizeof(HashItem*));
 	
 	// Solve windows problems, each pointer is NULL in the beginning
@@ -62,8 +62,6 @@ HashItem *findValue(HashTable *table, char *word, HashItem *item) {
 		item = table->items[key];
 
 		if(item == NULL) return NULL;	
-		printList(item);
-		printf("\n");
 		if(strcmp(word, item->word) == 0) {
 			return item;
 		}

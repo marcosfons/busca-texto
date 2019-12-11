@@ -1,5 +1,6 @@
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "printer.h"
 
@@ -28,6 +29,19 @@ void printSubstring(char *string, int start, int end) {
 	printf("%.*s", end - start +1, (string + start)); 
 }
 
+void printMany(char c, int count, char start, char end) {
+	printf("%c", start);
+	for(int i = 0; i < count; i++) {
+		printf("%c", c);
+	}
+	printf("%c", end);
+}
+
+void clearScreen() {
+	system("@cls||clear");
+	// printf("\e[1;1H\e[2J");
+}
+
 int printMatchedWord(char *word) {
 	printf(YELLOW("%s"), word);
 	return strlen(word);
@@ -41,5 +55,13 @@ void printLineWithMarkedWord(char *line, char *word, int posWord, int nRow) {
 	fwrite(line, 1, posWord, stdout);
 	printf(YELLOW("%s"), word);
 	fwrite(line + finalPosWord, 1, strlen(line) - finalPosWord, stdout);
+}
+
+void printLines(char **lines, int lineCount) {
+	printf("\nImprimindo na tela o texto do arquivo, com a contagem de linhas\n\n");
+	for(int i = 0; i < lineCount; i++) {
+		printf("%2d  %s", i+1,  lines[i]);
+	}
+	printf("\n");
 }
 

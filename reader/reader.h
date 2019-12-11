@@ -5,7 +5,7 @@
 void openFile(char *pathFile, char ***rows);
 
 // Responsible to closeFile and free memory
-void closeFile(char ***rows, int lines);
+void closeFile();
 
 // Responsible to find the next word in file and returns it
 char *findNextWord(int *row, int *col, int *sizeWord, char ***rows, int *isNewLine);

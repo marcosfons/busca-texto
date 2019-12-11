@@ -45,10 +45,12 @@ void searchValue(HashTable *table, char **rows, int row) {
 	while ((getchar()) != '\n'); 
 	fgets(word, 50, stdin);
 	word[strlen(word) - 1] = '\0';
+	
+	printf("As palavras sublinhadas em amarelo foram as encontradas\nE o numero em vermelho é o numero da linha\n\n");
 
 	HashItem *item = NULL;
 	item = findValue(table, word, item);
-	
+
 	for(int i = 0; i < row; i++) {
 		if(item != NULL) {
 			if(item->row == i) {
@@ -87,13 +89,14 @@ void readFileAndCreateHashTable(char *nameFile, HashTable *table, char ***rows, 
 
 char *requestNameFile() {
 	printMany('-', 57, '\n', '\n');
-	printf("Por favor, digite um nome de arquivo válido, com extensão\n\nVocê pode evitar essa tela\nPasse o nome do arquivo por parâmetro\nExemplo: main.o texto.txt\n");
+	printf("Por favor, digite um nome de arquivo válido, com extensão\n\nVocê pode evitar essa tela\nPasse o nome do arquivo por parâmetro\nExemplo: ./main.o texto.txt\n");
 	printMany('-', 57, '\n', '\n');
 	
 	char *nameFile = malloc(50 * sizeof(char));
 	printf(">>> ");
 	fgets(nameFile, 50, stdin);
 	nameFile[strlen(nameFile) - 1] = '\0';
+	clearScreen();
 	return nameFile;
 }
 
@@ -136,26 +139,14 @@ int main(int argc, char *argv[]) {
 		}
 	}
 	printf("\nSaindo\n");
-	/*
-	// Vector of rows, each row is a string
-	char **rows;
-	int countRows = 0;
-
-	// Initialize the HashTable variables
-	HashTable table;
-	createHashTable(&table);
-
-	readFileAndCreateHashTable("texto.txt", &table, &rows, &countRows);
-
-	//printHash(&table);
-	//searchValue(&table, rows, row);	
-	searchValue(&table, rows, countRows);	
-
-	*/
-	for(int i = 0; i < countRows; i++) {
-		free((rows)[i]);
+	
+	
+	if(rows != NULL) {
+		for(int i = 0; i < countRows; i++) {
+			free((rows)[i]);
+		}
+		free(rows);
 	}
-	free(rows);
 	freeTable(&table);
 	
 	return 0;

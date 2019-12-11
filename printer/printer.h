@@ -1,5 +1,3 @@
-
-
 void printLine(char *line, int nRow);
 
 void printSubstring(char *string, int start, int end);
@@ -14,5 +12,3 @@ int printMatchedWord(char *word);
 void clearScreen();
 
 void printLines(char **lines, int lineCount);
-
-void printLineWithMarkedWord(char *line, char *word, int posWord, int nRow);

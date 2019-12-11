@@ -29,12 +29,6 @@ void openFile(char *pathFile, char ***rows) {
 }
 
 void closeFile() {
-	/*
-	for(int i = 0; i < lines; i++) {
-		free((*rows)[i]);
-	}
-	free(*rows);
-	*/
 	if(file != NULL) {	
 		fclose(file);
 		file = NULL;
